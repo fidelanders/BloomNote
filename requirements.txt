@@ -4,5 +4,11 @@ python-multipart
 openai-whisper
 torch
 pydub
+ffmpeg-python
 aiofiles
 slowapi
+
+# Additional Audio Libraries (Optional but recommended)
+# librosa
+# soundfile
+# numpy
