@@ -8,4 +8,5 @@ from app.main import app
 
 # Vercel requires this
 if __name__ == "__main__":
-    app.run()
+    # This won't run on Vercel, but keeps the file valid
+    pass

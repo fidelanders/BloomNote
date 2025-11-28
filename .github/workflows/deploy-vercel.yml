@@ -22,11 +22,6 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-
       - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
@@ -36,7 +31,6 @@ jobs:
           python -c "import whisper; print('✅ Whisper imported successfully')"
           python -c "import fastapi; print('✅ FastAPI imported successfully')"
           python -c "import torch; print(f'✅ PyTorch using: {\"GPU\" if torch.cuda.is_available() else \"CPU\"}')"
-          echo "All tests passed!"
 
   deploy:
     name: Deploy to Vercel
@@ -60,4 +54,4 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
