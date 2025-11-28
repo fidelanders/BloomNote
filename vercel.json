@@ -4,6 +4,10 @@
     {
       "src": "api/index.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
@@ -12,14 +16,9 @@
       "dest": "api/index.py"
     }
   ],
-  "functions": {
-    "api/index.py": {
-      "maxDuration": 60
-    }
-  },
   "env": {
     "MODEL_SIZE": "tiny",
-    "DEBUG": "false",
+    "DEBUG": "false", 
     "LOG_LEVEL": "info"
   }
 }
