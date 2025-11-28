@@ -11,13 +11,13 @@ class Settings:
     DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     
     # Server Configuration
-    HOST: str = os.getenv("HOST", "0.0.0.0")
-    PORT: int = int(os.getenv("PORT", "8082"))
+    HOST: str = "0.0.0.0"
+    PORT: int = int(os.getenv("PORT", "8000"))
     
     # API Configuration
-    DOCS_URL: str = "/docs"
-    REDOC_URL: str = "/redoc"
-    API_PREFIX: str = "/api/v1"
+    # DOCS_URL: str = "/docs"
+    # REDOC_URL: str = "/redoc"
+    # API_PREFIX: str = "/api/v1"
     
     # Model Configuration
     MODEL_SIZE: str = os.getenv("MODEL_SIZE", "small")
@@ -33,5 +33,9 @@ class Settings:
     
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "info")
+
+    # Vercel Specific
+    VERCEL_ENVIRONMENT: bool = "VERCEL" in os.environ
+    VERCEL_URL: Optional[str] = os.getenv("VERCEL_URL")
 
 settings = Settings()

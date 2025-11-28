@@ -8,6 +8,11 @@ ffmpeg-python
 aiofiles
 slowapi
 
+# Environment Management
+python-dotenv
+httpx
+asgiref
+
 # Additional Audio Libraries (Optional but recommended)
 # librosa
 # soundfile

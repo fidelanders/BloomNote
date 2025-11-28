@@ -1,10 +1,19 @@
+# from fastapi import FastAPI
+# from app.middleware.rate_limiter import limiter, RateLimitExceeded
+# from app.middleware.cors import add_cors_middleware
+# from app.routes import health, transcription, info
+# from app.core.config import settings
+# from app.core.models import load_whisper_model
+# import logging
+
 from fastapi import FastAPI
-from app.middleware.rate_limiter import limiter, RateLimitExceeded
-from app.middleware.cors import add_cors_middleware
+from fastapi.middleware.cors import CORSMiddleware
+from app.middleware.rate_limiter import limiter
 from app.routes import health, transcription, info
 from app.core.config import settings
 from app.core.models import load_whisper_model
 import logging
+import os
 
 # Set up logging
 logging.basicConfig(
@@ -24,10 +33,19 @@ def create_application() -> FastAPI:
     )
     
     # Add middleware
-    add_cors_middleware(app)
-    app.state.limiter = limiter
-    app.add_exception_handler(RateLimitExceeded, RateLimitExceeded._rate_limit_exceeded_handler)
+    # add_cors_middleware(app)
+    # app.state.limiter = limiter
+    # app.add_exception_handler(RateLimitExceeded, RateLimitExceeded._rate_limit_exceeded_handler)
     
+        # Add CORS middleware
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     # Include routers
     app.include_router(health.router, prefix="/api/v1", tags=["Health"])
     app.include_router(info.router, prefix="/api/v1", tags=["Information"])
